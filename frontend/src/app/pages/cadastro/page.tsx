@@ -39,10 +39,9 @@ const Register = () => {
         <h1>to</h1>
         <h1>become</h1>
         <h1>awesome</h1>
-        <h1 className="pt-16 text-[50px]">Congratulations for prioritizing quality.</h1>
+        <h1 className="pt-16 text-[50px]">Congratulations for<br/> prioritizing quality.</h1>
       </div>
-
-      <div className="bg-white w-2/5 flex justify-center items-center">
+      <div className="bg-white w-3/5 flex justify-center items-center">
         <div className="w-4/5 text-black p-8 rounded-lg">
         
           <h1 className="text-3xl font-semibold mb-8 text-center">Sign In</h1>
@@ -54,7 +53,7 @@ const Register = () => {
               name="name"
               onChange={handleChange}
               value={formData.name}
-              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F] focus:shadow-none"
+              className="bg-[#F5F5F5] w-2/3 p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F] focus:shadow-none"
             />
             <input
               type="email"
@@ -62,7 +61,7 @@ const Register = () => {
               name="email"
               onChange={handleChange}
               value={formData.email}
-              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F]"
+              className="bg-[#F5F5F5] w-2/3 p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F]"
             />
             <input
               type="password"
@@ -70,9 +69,13 @@ const Register = () => {
               name="password"
               onChange={handleChange}
               value={formData.password}
-              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-8 placeholder-[#8F8F8F]"
+              className="bg-[#F5F5F5] w-2/3 p-4 my-3 font-bold rounded-md shadow-lg mb-8 placeholder-[#8F8F8F]"
             />
-             <button className="relative bg-[#7E263D] text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] transition-all duration-300 hover:bg-white hover:text-[#7E263D] hover:border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D]">Create Account</button>
+             <button className={`${
+                formData.email == "" || formData.password == "" || formData.name == ""
+                  ? "relative bg-[#7E263D] cursor-pointer text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D] opacity-50"
+                  : "relative bg-[#7E263D] cursor-pointer text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] transition-all duration-300 hover:bg-white hover:text-[#7E263D] hover:border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D]"
+              }`}>Create Account</button>
              <p className="text-black mt-8 font-bold cursor-pointer">i have an account</p> 
           </form>
         </div>
