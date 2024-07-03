@@ -27,7 +27,7 @@ const Register = () => {
   };
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
+    
     /* Lidar aqui com a requisição ao Back-End */
   }
 
@@ -35,10 +35,10 @@ const Register = () => {
     <div className="flex min-h-screen bg-[#A83050] overflow-hidden">
       <div className="text-[70px] font-semibold w-3/5 p-12">
         <h1>You´re</h1>
-        <h1>About</h1>
+        <h1>about</h1>
         <h1>to</h1>
-        <h1>Become</h1>
-        <h1>Awesome</h1>
+        <h1>become</h1>
+        <h1>awesome</h1>
         <h1 className="pt-16 text-[50px]">Congratulations for prioritizing quality.</h1>
       </div>
 
@@ -54,7 +54,7 @@ const Register = () => {
               name="name"
               onChange={handleChange}
               value={formData.name}
-              className="bg-[#F5F5F5] w-full p-4 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F] focus:shadow-none"
+              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F] focus:shadow-none"
             />
             <input
               type="email"
@@ -62,7 +62,7 @@ const Register = () => {
               name="email"
               onChange={handleChange}
               value={formData.email}
-              className="bg-[#F5F5F5] w-full p-4 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F]"
+              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F]"
             />
             <input
               type="password"
@@ -70,9 +70,10 @@ const Register = () => {
               name="password"
               onChange={handleChange}
               value={formData.password}
-              className="bg-[#F5F5F5] w-full p-4 font-bold rounded-md shadow-lg mb-8 placeholder-[#8F8F8F]"
+              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-8 placeholder-[#8F8F8F]"
             />
-             <button className="relative bg-[#7E263D] text-white py-4 px-12 text-[18px] rounded-md border border-[#7E263D] transition-all duration-300 hover:bg-white hover:text-[#7E263D] hover:border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D]">Create Account</button>
+             <button className="relative bg-[#7E263D] text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] transition-all duration-300 hover:bg-white hover:text-[#7E263D] hover:border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D]">Create Account</button>
+             <p className="text-black mt-8 font-bold cursor-pointer">i have an account</p> 
           </form>
         </div>
       </div>
