@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 type FormData = {
   email: string;
@@ -14,8 +14,16 @@ const Login = () => {
     password: "",
   } as FormData);
 
+  const router = useRouter();
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    // Dps fazer a lógica de submit com o backend
+  };
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = event.target
+    let { name, value } = event.target;
 
     setFormData((prev) => {
       return {
@@ -26,50 +34,55 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#630330]">
-          <form className="flex flex-col items-center justify-center gap-8 w-1/2 ml-10">
-                <h1 className="text-3xl text-white">WELCOME</h1>
-                <input
-                  className="p-2 rounded-full w-7/12"
-                  type="text"
-                  placeholder="Email"
-                  name="email"
-                  onChange={handleChange}
-                  value={formData.email}
-                  required
-                />
-                <div className="flex flex-col w-7/12 gap-1">
-                    <input
-                      className="p-2 rounded-full"
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      onChange={handleChange}
-                      value={formData.password}
-                      required
-                    />
-                    <a className="ml-auto text-white" href="/pages/register">Register now</a>
-                </div>
-                <button
-                  className={`${
-                    formData.email == "" || formData.password == ""
-                      ? "p-2 bg-[#50C878] text-white rounded-full w-7/12 opacity-50"
-                      : "p-2 bg-[#50C878] text-white rounded-full w-7/12"
-                  }`}
-                  type="submit"
-                  disabled={formData.email == "" || formData.password == ""}
-                >
-                  Log in
-                </button>
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#A83050] overflow-hidden">
+      <div className="text-[70px] font-semibold md:w-3/5 p-8 md:p-12">
+        <h1>Quality.</h1>
+        <h1>Presence.</h1>
+        <h1>Power.</h1>
+        <h1>Influence.</h1>
+        <h1>Authority.</h1>
+        <h1 className="pt-16 text-[50px]">You're already a BAD BOY</h1>
+      </div>
+      <div className="bg-white md:w-2/5 min-h-screen flex justify-center items-center">
+        <div className="w-4/5 text-black p-8 rounded-lg">
+          <h1 className="text-3xl font-semibold mb-8 text-center">
+            Welcome back
+          </h1>
+          <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <input
+              type="email"
+              placeholder="Email..."
+              name="email"
+              onChange={handleChange}
+              value={formData.email}
+              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F] focus:shadow-none"
+            />
+            <input
+              type="password"
+              placeholder="Password..."
+              name="password"
+              onChange={handleChange}
+              value={formData.password}
+              className="bg-[#F5F5F5] w-full p-4 my-3 font-bold rounded-md shadow-lg mb-4 placeholder-[#8F8F8F] focus:shadow-none"
+            />
+            <button
+              disabled={formData.email == "" || formData.password == ""}
+              className={`${
+                formData.email == "" || formData.password == ""
+                  ? "relative bg-[#7E263D] cursor-pointer text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D] opacity-50"
+                  : "relative bg-[#7E263D] cursor-pointer text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] transition-all duration-300 hover:bg-white hover:text-[#7E263D] hover:border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D]"
+              }`}
+            >
+              Login
+            </button>
+            <p
+              onClick={() => router.push("/pages/cadastro")}
+              className="text-black mt-8 font-bold cursor-pointer"
+            >
+              I don't have an account
+            </p>
           </form>
-      <div className="w-1/2 flex items-center justify-center">
-        <Image
-          className="rounded-3xl"
-          src={"/image 10.svg"}
-          width={500}
-          height={300}
-          alt="Login image"
-        />
+        </div>
       </div>
     </div>
   );
