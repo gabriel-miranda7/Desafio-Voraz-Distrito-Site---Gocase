@@ -73,6 +73,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.3)
@@ -114,6 +115,8 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.7.2)
+    jwt (2.8.2)
+      base64
     language_server-protocol (3.17.0.3)
     logger (1.6.0)
     loofah (2.22.0)
@@ -159,6 +162,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.0)
     rack (3.1.6)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -301,13 +306,16 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   capybara
   debug
   importmap-rails
   jbuilder
+  jwt
   puma (>= 5.0)
+  rack-cors
   rails (~> 7.2.0.beta2)
   rubocop-rails-omakase
   selenium-webdriver
