@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useAuthenticationContext } from '../../contexts/authenticationContext'
 
 type FormData = {
   email: string;
@@ -9,6 +10,7 @@ type FormData = {
 };
 
 const Login = () => {
+  const { login } = useAuthenticationContext()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -16,10 +18,16 @@ const Login = () => {
 
   const router = useRouter();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
-    // Dps fazer a lógica de submit com o backend
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      await login(formData.email, formData.password);
+      // Redirecionar ou mostrar uma mensagem de sucesso
+      router.push("/pages/home");
+    } catch (error) {
+      // Lidar com erros
+      console.error("Signup failed:", error);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

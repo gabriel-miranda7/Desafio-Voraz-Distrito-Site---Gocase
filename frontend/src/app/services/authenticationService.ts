@@ -33,7 +33,7 @@ const login = async (email: string, password: string): Promise<AuthenticationRes
 
 const signup = async (username: string, email: string, password: string): Promise<SignUpResponse> => {
     try {
-        const response = await apiProvider.post<SignUpResponse, SignUpRequest>("/signup", {
+        const response = await apiProvider.post<SignUpResponse, SignUpRequest>("/users", {
             email,
             password,
             username

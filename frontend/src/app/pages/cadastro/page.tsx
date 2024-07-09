@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuthenticationContext } from '../../contexts/authenticationContext'
 
 type FormData = {
   name: string;
@@ -10,6 +11,7 @@ type FormData = {
 };
 
 const Register = () => {
+  const { signup } = useAuthenticationContext()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,10 +31,17 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    
-    /* Lidar aqui com a requisição ao Back-End */
-  }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      await signup(formData.name, formData.email, formData.password);
+      // Redirecionar ou mostrar uma mensagem de sucesso
+      router.push("/pages/home");
+    } catch (error) {
+      // Lidar com erros
+      console.error("Signup failed:", error);
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-[#A83050] overflow-hidden">
