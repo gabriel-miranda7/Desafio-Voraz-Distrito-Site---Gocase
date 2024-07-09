@@ -30,6 +30,13 @@
     display: inline-block;
   }
   
+  .customAvatar{
+    color: black;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 50%;
+  }
+
   .navItem {
     margin-right: 10px;
     font-weight: 400;
