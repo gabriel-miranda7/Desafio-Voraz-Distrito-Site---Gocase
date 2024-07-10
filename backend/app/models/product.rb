@@ -29,4 +29,19 @@ class Product < ApplicationRecord
     # Retornando a pontuação como um inteiro
     score.to_i
   end
+
+  def similarity_score_profile(vector_b)
+    vector_a = Vector[
+      self.masculine_cloth_score,
+      self.feminine_cloth_score,
+      self.electronic_score,
+      self.jewelry_score
+    ]
+    numerator = vector_a.inner_product(vector_b)
+    denominator = vector_a.r * vector_b.r
+    score = (numerator / denominator) * 100
+
+    # Retornando a pontuação como um inteiro
+    score.to_i
+  end
 end

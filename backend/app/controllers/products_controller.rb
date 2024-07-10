@@ -1,8 +1,46 @@
 
+require "matrix"
 class ProductsController < ApplicationController
     def index
       products = Product.all
       render json: products
+    end
+
+    def recommended
+      products = Product.all
+
+      # Verifica se há um cookie de perfil de usuário
+      user_profile_cookie = cookies[:user_profile]
+
+      if user_profile_cookie.present?
+        # Parse os dados do cookie
+        user_profile = JSON.parse(user_profile_cookie, symbolize_names: true)
+
+        # Cria um vetor com os dados do perfil do usuário (soma acumulada)
+        user_vector = Vector[
+          user_profile[:masculine_cloth_score] || 0,
+          user_profile[:feminine_cloth_score] || 0,
+          user_profile[:electronic_score] || 0,
+          user_profile[:jewelry_score] || 0
+        ]
+
+
+        # Calcula a similaridade entre os produtos e o perfil do usuário
+        products_with_similarity = products.map do |product|
+          {
+            product: product,
+            similarity_score: product.similarity_score_profile(user_vector)
+          }
+        end
+
+        # Ordena os produtos com base na similaridade (do maior para o menor)
+        sorted_products = products_with_similarity.sort_by { |item| -item[:similarity_score] }.map { |item| item[:product] }
+
+        render json: sorted_products, status: :ok
+      else
+        # Caso não haja dados no cookie, exibe produtos de forma padrão
+        render json: products
+      end
     end
 
     def show
