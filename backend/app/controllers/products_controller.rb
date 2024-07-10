@@ -1,37 +1,28 @@
 
 class ProductsController < ApplicationController
     def index
-      service = FakeStoreService.new
-      response = service.get_products
-  
-      if response.success? && !response.parsed_response.nil? && !response.parsed_response.empty?
-        render json: response.parsed_response, status: :ok
-      else
-        render json: { error: "Não foi possível obter os produtos da API." }, status: :bad_request
-      end
+      products = Product.all
+      render json: products
     end
-  
+
     def show
-      service = FakeStoreService.new
-      response = service.get_product(params[:id])
-  
-      if response.success? && !response.parsed_response.nil? && !response.parsed_response.empty?
-        render json: response.parsed_response, status: :ok
+      product = Product.find_by(id: params[:id])
+
+      if product
+        render json: product, status: :ok
       else
-        render json: { error: "Não foi possível obter o produto da API." }, status: :bad_request
+        render json: { error: "Produto não encontrado." }, status: :not_found
       end
     end
 
     def categories
         service = FakeStoreService.new
         response = service.get_categories
-    
+
         if response.success? && !response.parsed_response.nil? && !response.parsed_response.empty?
           render json: response.parsed_response, status: :ok
         else
           render json: { error: "Não foi possível obter as categorias da API." }, status: :bad_request
         end
     end
-
-  end
-  
+end
