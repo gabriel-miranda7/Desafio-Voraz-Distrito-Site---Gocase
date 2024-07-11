@@ -6,11 +6,12 @@ import banner1Mobile from './assets/banner_1_mobile.png'
 import Image from 'next/image'
 import ProductCard from './components/ProductCard/ProductCard'
 
-import productsService from './services/productsService'
+import productsService, { Product } from './services/productsService'
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
+  
   useEffect(() => {
     const fetchProducts = async () => {
         try {
@@ -19,7 +20,6 @@ const HomePage = () => {
               ...response[key], // Copia os atributos do objeto
               id: Number(key) // Define o ID como o valor convertido da chave
           }));
-          console.log(productsArray)
           setProducts(productsArray);
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);

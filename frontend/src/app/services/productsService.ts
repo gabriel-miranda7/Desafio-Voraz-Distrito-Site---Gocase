@@ -1,7 +1,8 @@
 
 import apiProvider from "../providers/apiProvider";
+import Cookies from "js-cookie";
 
-type Product = {
+export type Product = {
     id: number;
     title: string;
     price: number;
@@ -20,13 +21,19 @@ type Product = {
     updated_at: string;
 }
 
-type GetProductsResponse = {
-    products: Product[];
+export interface GetProductsResponse {
+    [key: string]: Omit<Product, 'id'>
 }
 
 const getProducts = async (): Promise<GetProductsResponse> => {
     try {
-        const response = await apiProvider.get<GetProductsResponse>("/products");
+        const userProfile = Cookies.get("user_profile");
+        
+        const response = await apiProvider.get<GetProductsResponse>("/products/recommended", {
+            headers: {
+                'Cookie': `user_profile=${userProfile}`
+            }
+        });
         return response;
     } catch (error) {
         throw error;

@@ -3,7 +3,7 @@ import Image from "next/image";
 export type ProductCardProps = {
     image: string;
     name: string;
-    price: string;
+    price: number;
 }
 
 const ProductCard = ({image, name, price}: ProductCardProps) => {
