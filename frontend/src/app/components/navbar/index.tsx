@@ -8,6 +8,7 @@ import { Avatar } from "@nextui-org/react";
 import { jwtDecode } from "jwt-decode";
 
 
+
 const NavBar = () => {
   const [username, setUsername] = useState<string | undefined>(undefined);
 

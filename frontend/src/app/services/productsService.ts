@@ -40,8 +40,18 @@ const getProducts = async (): Promise<GetProductsResponse> => {
     }
 }
 
+const getProduct = async (id: string | string[]): Promise<Product> => {
+    try {
+        const response = await apiProvider.get<Product>(`/products/${id}`)
+        return response
+    } catch (error) {
+        throw error
+    }
+}
+
 const productsService = {
-    getProducts
+    getProducts,
+    getProduct
 }
 
 export default productsService;
