@@ -7,20 +7,29 @@ import user from '../../assets/user.png';
 import { Avatar } from "@nextui-org/react";
 import { jwtDecode } from "jwt-decode";
 
+
 const NavBar = () => {
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState<string | undefined>(undefined);
+
+  interface JwtToken {
+    username: string;
+    // Adicione outras propriedades do token JWT, se houver
+  }
 
   useEffect(() => {
+    const decodeName = () => {
+      const token = localStorage.getItem("token");
+      if (token){
+        const decoded = jwtDecode<JwtToken>(token); // Decodifica como JwtToken
+        if (decoded && typeof decoded.username === 'string') {
+          setUsername(decoded.username);
+        }
+      }
+    }
+    
     decodeName();  // Chama decodeName quando o componente for montado
   }, []);  // Array vazio para garantir que seja executado apenas uma vez, equivalente a componentDidMount
-
-  const decodeName = () => {
-    const token = localStorage.getItem("token");
-    if (token){
-      const decoded = jwtDecode(token);
-      setUsername(decoded.username);
-    }
-  }
+  
   return (
     <>
       <div className={styles.navHead}>

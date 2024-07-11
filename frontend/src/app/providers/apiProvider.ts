@@ -8,6 +8,7 @@ class ApiProvider {
 
   constructor() {
     this.instance = axios.create({
+      withCredentials: true,
       baseURL: BASE_API_URL,
     });
 
