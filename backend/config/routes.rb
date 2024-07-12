@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resource :users, only: [ :create ]
+  resource :users, only: [ :create ] do
+    post "update_cookie", to: "users#update_vector" # Rota para atualizar os scores
+    get "update_cookie", to: "users#update_vector" # Rota para atualizar os scores
+  end
   post "/login", to: "users#login"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

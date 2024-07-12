@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_07_10_193402) do
+ActiveRecord::Schema[7.2].define(version: 2024_07_12_193823) do
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.decimal "price"
@@ -32,9 +32,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_10_193402) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "masculine_cloth_score"
-    t.integer "feminine_cloth_score"
-    t.integer "electronic_score"
-    t.integer "jewelry_score"
+    t.float "masculine_cloth_score"
+    t.float "feminine_cloth_score"
+    t.float "electronic_score"
+    t.float "jewelry_score"
   end
 end
