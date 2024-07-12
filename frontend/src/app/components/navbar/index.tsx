@@ -6,6 +6,7 @@ import logo from '../../assets/logo_sem_fundo.png';
 import user from '../../assets/user.png';
 import { Avatar } from "@nextui-org/react";
 import { jwtDecode } from "jwt-decode";
+import authenticationService from '@/app/services/authenticationService';
 
 
 
@@ -51,7 +52,10 @@ const NavBar = () => {
         {!username ? <div className={styles.logoImage} onClick={() => window.location.href = '/pages/login'}>
           <Image src={user} alt="Usuário" width={60} height={60} />
         </div> :
-        <Avatar isDisabled name={username} className={styles.customAvatar}/>} 
+        <Avatar onClick={() => {
+          authenticationService.logout()
+          window.location.reload()
+          }} isDisabled name={username} className={styles.customAvatar}/>} 
       </div>
     </>
   );

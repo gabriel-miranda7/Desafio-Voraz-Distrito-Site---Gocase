@@ -1,6 +1,7 @@
 
 import apiProvider from "../providers/apiProvider";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export type Product = {
     id: number;
@@ -26,9 +27,26 @@ export interface GetProductsResponse {
     [key: string]: Product
 }
 
-const seeOrCreateCookie = () => {
+const seeOrCreateCookie = async (): Promise<void> => {
     const cookieName = 'user_profile';
-  
+    const token = localStorage.getItem('token');
+
+    if (token){ //se existir token vamos assumir que o usuário está LOGADO
+        try {
+            const decoded: any = jwtDecode(token);
+            const id = decoded.user_id; // Pega o id do usuario
+            const response = await apiProvider.get<GetProductsResponse>(`/users/update_cookie?id=${id}`); //Recebe o cookie do backend
+            Cookies.set(cookieName, JSON.stringify(response), { //Seta ele no frontend
+                expires: 365*10, // expira em 10 anos
+                path: '/',
+                secure: process.env.NODE_ENV === 'production', // apenas HTTPS em produção
+                sameSite: 'strict',
+              });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     // Verifica se o cookie já existe
     if (!Cookies.get(cookieName)) {
         const userProfile = {
@@ -46,13 +64,14 @@ const seeOrCreateCookie = () => {
         sameSite: 'strict',
       });
   
-      console.log('Cookie criado!');
     }
 };
 
-const updateCookie = (product: Product) => {
+const updateCookie = async (product: Product): Promise<void> => {
     const cookieName = 'user_profile';
     const cookie = Cookies.get(cookieName);
+    const token = localStorage.getItem('token');
+    
     if (cookie) {
         const userProfile = JSON.parse(cookie);
 
@@ -63,16 +82,37 @@ const updateCookie = (product: Product) => {
         userProfile.electronic_score =  (userProfile.electronic_score * 2 + product.electronic_score * product_weight) / (2 + product_weight)
         userProfile.jewelry_score =  (userProfile.jewelry_score * 2 + product.jewelry_score * product_weight) / (2 + product_weight)
 
+        const scores = {
+            masculine_cloth_score: userProfile.masculine_cloth_score,
+            feminine_cloth_score: userProfile.feminine_cloth_score,
+            electronic_score: userProfile.electronic_score,
+            jewelry_score: userProfile.jewelry_score,
+        };
+
         Cookies.set(cookieName, JSON.stringify(userProfile), {
             expires: 365 * 10, // expira em 10 anos
             path: '/',
             secure: process.env.NODE_ENV === 'production', // apenas HTTPS em produção
             sameSite: 'strict',
           });
-      console.log('Cookie atualizado!');
-    }
+        
 
+    if (token){ //se existir token vamos assumir que o usuário está LOGADO
+        try {
+            const decoded: any = jwtDecode(token);
+            const id = decoded.user_id; // Pega o id do usuario
+    
+            const response = await apiProvider.post<{ message: string }, { scores: typeof scores }>(
+                `/users/update_cookie?id=${id}`, 
+                { scores }
+            );
+        }  catch(error){
+            throw error;
+            }
+        }
+    }
 }
+    
 
 const getProductsByCategory = async (category: string): Promise<GetProductsResponse> => {
     try {

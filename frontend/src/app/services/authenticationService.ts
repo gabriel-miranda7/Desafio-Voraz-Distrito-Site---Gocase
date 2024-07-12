@@ -44,8 +44,13 @@ const signup = async (username: string, email: string, password: string): Promis
     }
 }
 
+const logout = () => {
+    if (localStorage.getItem('token'))
+        localStorage.removeItem('token');
+}
+
 const authenticationService = {
-    login, signup
+    login, signup, logout
 }
 
 export default authenticationService

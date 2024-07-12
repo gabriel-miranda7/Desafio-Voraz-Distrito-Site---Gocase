@@ -20,10 +20,6 @@ const HomePage = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    productsService.seeOrCreateCookie();
-  }, []);
-
   const getBannerImage = () => {
     switch (maxKey) {
       case "masculine_cloth_score":
@@ -40,13 +36,12 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const setBanner = () => {
+    const setBanner = async () => {
+      await productsService.seeOrCreateCookie();
       const userProfileCookie = Cookies.get('user_profile');
-
       if (userProfileCookie) {
         try {
           const parsed = JSON.parse(userProfileCookie);
-
           // Verifica se o objeto é válido e não está vazio
           if (parsed && Object.keys(parsed).length > 0) {
             let maxKey = null;
