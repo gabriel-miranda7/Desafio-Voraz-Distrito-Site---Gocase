@@ -15,6 +15,10 @@ const HomePage = () => {
   const router = useRouter();
 
   useEffect(() => {
+    productsService.seeOrCreateCookie();
+  }, []);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await productsService.getProducts();
@@ -53,7 +57,9 @@ const HomePage = () => {
             .slice(0, 7)
             .map((prod) => (
               <ProductCard
-                onClick={() => router.push(`/pages/product/${prod.id}`)}
+                onClick={() => {
+                  productsService.updateCookie(prod);
+                  router.push(`/pages/product/${prod.id}`)}}
                 key={prod.id}
                 name={prod.title}
                 price={prod.price}

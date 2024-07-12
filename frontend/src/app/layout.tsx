@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthenticationContextProvider from "./contexts/authenticationContext";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const inter = Inter({ subsets: ["latin"] });
 

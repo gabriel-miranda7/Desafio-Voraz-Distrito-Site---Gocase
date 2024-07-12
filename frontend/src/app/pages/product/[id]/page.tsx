@@ -58,17 +58,17 @@ const SingleProduct = () => {
           width={526}
           height={128}
         />
-        <div className="flex flex-col gap-6 w-3/6 justify-center items-center">
-          <h1 className="text-black font-bold text-3xl">{product?.title}</h1>
-          <p className="text-black w-2/5 font-bold">{product?.category}</p>
+        <div className="flex flex-col gap-6 w-3/6 justify-end text-start items-start">
+          <h1 className="text-black font-bold text-4xl">{product?.title}</h1>
+          <p className="text-black w-2/5 font-bold text-start">{product?.category}</p>
           <p className="text-black w-2/5">{product?.description}</p>
-          <p className="text-black font-bold">${product?.price}</p>
-          <button className="bg-orange-500 w-3/6 p-2 rounded-lg text-black font-bold">
-            Add to Cart
-          </button>
-          <button className="bg-yellow-400 w-3/6 p-2 rounded-lg text-black font-bold">
-            Buy Now
-          </button>
+          <p className="text-black font-bold text-3xl">${product?.price}</p>
+            <button className="bg-orange-500 w-3/6 p-2 rounded-lg text-black font-bold">
+              Add to Cart
+            </button>
+            <button className="bg-yellow-400 w-3/6 p-2 rounded-lg text-black font-bold">
+              Buy Now
+            </button>
         </div>
       </div>
       <div className="flex flex-col mt-10 justify-center items-center">
@@ -83,7 +83,10 @@ const SingleProduct = () => {
               .slice(0, 7)
               .map((prod) => (
                 <ProductCard
-                  onClick={() => router.push(`/pages/product/${prod.id}`)}
+                  onClick={() => {
+                    router.push(`/pages/product/${prod.id}`)
+                    productsService.updateCookie(prod)
+                  }}
                   key={prod.id}
                   name={prod.title}
                   price={prod.price}

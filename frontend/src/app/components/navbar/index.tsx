@@ -39,7 +39,7 @@ const NavBar = () => {
       </div>
       <div className={styles.nav}>
         <div className={styles.logoImage}>
-          <Image src={logo} alt="Logo da empresa" width={60} height={60} />
+          <Image src={logo} alt="Logo da empresa" onClick={() => window.location.href = '/'} width={60} height={60} />
         </div>
         <ul className={styles.navItems}>
           <li className={styles.navItem}><a className={styles.navLink} href="/">Eletronics</a></li>
