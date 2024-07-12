@@ -74,6 +74,15 @@ const updateCookie = (product: Product) => {
 
 }
 
+const getProductsByCategory = async (category: string): Promise<GetProductsResponse> => {
+    try {
+        const response = await apiProvider.get<GetProductsResponse>(`/products/category/${category}`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
 const getProducts = async (): Promise<GetProductsResponse> => {
     try {
         const userProfile = Cookies.get("user_profile");
@@ -101,6 +110,7 @@ const getProduct = async (id: string | string[]): Promise<Product> => {
 const productsService = {
     getProducts,
     getProduct,
+    getProductsByCategory,
     seeOrCreateCookie,
     updateCookie
 }

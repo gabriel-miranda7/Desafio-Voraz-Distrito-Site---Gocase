@@ -42,10 +42,10 @@ const NavBar = () => {
           <Image src={logo} alt="Logo da empresa" onClick={() => window.location.href = '/'} width={60} height={60} />
         </div>
         <ul className={styles.navItems}>
-          <li className={styles.navItem}><a className={styles.navLink} href="/">Eletronics</a></li>
-          <li className={styles.navItem}><a className={styles.navLink} href="/about">Jewelry</a></li>
-          <li className={styles.navItem}><a className={styles.navLink} href="/services">Men´s Clothing</a></li>
-          <li className={styles.navItem}><a className={styles.navLink} href="/contact">Woman´s Clothing</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} href="/pages/category/electronics">Electronics</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} href="/pages/category/jewelery">Jewelery</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} href="/pages/category/men's%20clothing">Men´s Clothing</a></li>
+          <li className={styles.navItem}><a className={styles.navLink} href="/pages/category/women's%20clothing">Woman´s Clothing</a></li>
         </ul>
         <input className={styles.searchBar} type='search' name='searchbar' placeholder='Search...' />
         {!username ? <div className={styles.logoImage} onClick={() => window.location.href = '/pages/login'}>
