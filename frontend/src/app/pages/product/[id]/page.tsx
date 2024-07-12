@@ -29,7 +29,6 @@ const SingleProduct = () => {
           const response = await productsService.getProducts();
           const productsArray = Object.keys(response).map((key) => ({
             ...response[key], // Copia os atributos do objeto
-            id: Number(key), // Define o ID como o valor convertido da chave
           }));
           setProducts(productsArray);
         } catch (error) {

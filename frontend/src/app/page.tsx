@@ -18,9 +18,8 @@ const HomePage = () => {
     const fetchProducts = async () => {
       try {
         const response = await productsService.getProducts();
-        const productsArray = response.map((product) => ({
-          ...product, // Copia os atributos do objeto
-          id: product.id, // Usa o ID vindo da API
+        const productsArray = Object.keys(response).map((key) => ({
+          ...response[key], // Copia os atributos do objeto
         }));
         setProducts(productsArray);
       } catch (error) {

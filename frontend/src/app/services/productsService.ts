@@ -21,8 +21,9 @@ export type Product = {
     updated_at: string;
 }
 
+
 export interface GetProductsResponse {
-    [key: string]: Omit<Product, 'id'>
+    [key: string]: Product
 }
 
 const getProducts = async (): Promise<GetProductsResponse> => {
