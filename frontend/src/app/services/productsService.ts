@@ -56,7 +56,7 @@ const updateCookie = (product: Product) => {
     if (cookie) {
         const userProfile = JSON.parse(cookie);
 
-        const product_weight = 0.2;
+        const product_weight = 0.1;
 
         userProfile.masculine_cloth_score =  (userProfile.masculine_cloth_score * 2 + product.masculine_cloth_score * product_weight) / (2 + product_weight)
         userProfile.feminine_cloth_score =  (userProfile.feminine_cloth_score * 2 + product.feminine_cloth_score * product_weight) / (2 + product_weight)

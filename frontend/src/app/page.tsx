@@ -2,21 +2,83 @@
 import NavBar from "@/app/components/navbar";
 import React, { useEffect, useState } from "react";
 import banner1 from "./assets/banner_1.png";
+import banner2 from "./assets/banner_2.png";
+import banner3 from "./assets/banner_3.png";
+import banner4 from "./assets/banner_4.png";
 import banner1Mobile from "./assets/banner_1_mobile.png";
 import Image from "next/image";
 import ProductCard from "./components/ProductCard/ProductCard";
 import badboys from './assets/bad_boys 1.png'
-
+import Cookies from 'js-cookie';
 import productsService, { Product } from "./services/productsService";
 import { useRouter } from "next/navigation";
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [maxKey, setMaxKey] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true)
 
   const router = useRouter();
 
   useEffect(() => {
     productsService.seeOrCreateCookie();
+  }, []);
+
+  const getBannerImage = () => {
+    switch (maxKey) {
+      case "masculine_cloth_score":
+        return banner1;
+      case "feminine_cloth_score":
+        return banner2;
+      case "electronic_score":
+        return banner3;
+      case "jewelry_score":
+        return banner4;
+      default:
+        return banner1;
+    }
+  };
+
+  useEffect(() => {
+    const setBanner = () => {
+      const userProfileCookie = Cookies.get('user_profile');
+
+      if (userProfileCookie) {
+        try {
+          const parsed = JSON.parse(userProfileCookie);
+
+          // Verifica se o objeto é válido e não está vazio
+          if (parsed && Object.keys(parsed).length > 0) {
+            let maxKey = null;
+            let maxValue = -Infinity;
+
+            for (const [key, value] of Object.entries(parsed)) {
+              if (typeof value === 'number' && value > maxValue) {
+                maxValue = value;
+                maxKey = key;
+              }
+            }
+
+            if (maxKey !== null) {
+              console.log('A chave com o maior valor é:', maxKey);
+              setMaxKey(maxKey);
+              
+              // Aqui você pode usar maxKey e maxValue para definir o banner ou fazer outra lógica
+            } else {
+              console.log('Não há valores numéricos no perfil do usuário.');
+            }
+          } else {
+            console.log('O cookie do perfil do usuário está vazio ou não contém valores numéricos.');
+          }
+        } catch (error) {
+          console.error('Erro ao analisar o cookie:', error);
+        }
+      } else {
+        console.log('Cookie "user_profile" não encontrado.');
+      }
+    };
+
+    setBanner();
   }, []);
 
   useEffect(() => {
@@ -33,7 +95,12 @@ const HomePage = () => {
     };
 
     fetchProducts();
+    setLoading(false)
   }, []);
+
+  if (loading){
+    return <div></div> 
+  }
 
   return (
     <>
@@ -46,7 +113,7 @@ const HomePage = () => {
           <Image src={banner1Mobile} alt="Banner 1 Mobile" unoptimized={true} />
         </div>
         <div className="hidden lg:block">
-          <Image src={banner1} alt="Banner 1" unoptimized={true} />
+          <Image src={getBannerImage()} alt="Banner 1" unoptimized={true} />
         </div>
         <h2 className="text-black text-center p-12 text-[24px] font-bold">
           You may like
