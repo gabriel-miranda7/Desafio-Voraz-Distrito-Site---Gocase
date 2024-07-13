@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
     def create
       @user = User.create(user_params)
+      @user.masculine_cloth_score = 2
+      @user.feminine_cloth_score = 2
+      @user.electronic_score = 2
+      @user.jewelry_score = 2
       if @user.valid?
         token = encode_token({ user_id: @user.id, username: @user.username })
         render json: { user: @user, token: token }, status: :ok
@@ -53,6 +57,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-      params.permit(:username, :password, :email) # Corrigido para :mail
+      params.permit(:username, :password, :email)
     end
 end
