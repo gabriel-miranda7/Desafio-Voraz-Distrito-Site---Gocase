@@ -53,6 +53,17 @@ class ProductsController < ApplicationController
       end
     end
 
+    def by_category
+      category = params[:category]
+      products = Product.where(category: category)
+
+      if products.present?
+        render json: products, status: :ok
+      else
+        render json: { error: "Nenhum produto encontrado para a categoria #{category}." }, status: :not_found
+      end
+    end
+
     def categories
         service = FakeStoreService.new
         response = service.get_categories
