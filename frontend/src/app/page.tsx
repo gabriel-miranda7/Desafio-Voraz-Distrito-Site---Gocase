@@ -137,6 +137,7 @@ const HomePage = () => {
             <button className="bg-[#A83050] my-5 text-white font-semibold py-2 px-4 rounded shadow hover:bg-blue-600 transition duration-300 ease-in-out">See more</button>
             </div>
       </div>
+      <div className="w-full h-[120px] m-0 bg-[#A83050] border"></div>
     </>
   );
 };

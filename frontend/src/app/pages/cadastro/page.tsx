@@ -36,7 +36,7 @@ const Register = () => {
     try {
       await signup(formData.name, formData.email, formData.password);
       // Redirecionar ou mostrar uma mensagem de sucesso
-      router.push("/pages/home");
+      router.push("/");
     } catch (error) {
       // Lidar com erros
       console.error("Signup failed:", error);
