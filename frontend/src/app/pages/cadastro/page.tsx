@@ -88,7 +88,7 @@ const Register = () => {
                   ? "relative bg-[#7E263D] cursor-pointer text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D] opacity-50"
                   : "relative bg-[#7E263D] cursor-pointer text-white py-4 px-24 text-[18px] rounded-md border border-[#7E263D] transition-all duration-300 hover:bg-white hover:text-[#7E263D] hover:border-[#7E263D] focus:scale-90 focus:bg-white focus:text-[#7E263D] focus:border-[#7E263D]"
               }`}>Create Account</button>
-             <p onClick={() => router.push("/pages/login")} className="text-black mt-8 font-bold cursor-pointer">i have an account</p> 
+             <p onClick={() => router.push("/")} className="text-black mt-8 font-bold cursor-pointer">i have an account</p> 
           </form>
         </div>
       </div>

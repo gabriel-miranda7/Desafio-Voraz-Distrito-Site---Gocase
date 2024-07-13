@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  
-  resources :products, only: [:index, :show] do
+  resources :products, only: [ :index, :show ] do
     collection do
-      get 'categories'
+      get "categories"
+      get "recommended"
     end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resource :users, only: [:create]
+  resource :users, only: [ :create ]
   post "/login", to: "users#login"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

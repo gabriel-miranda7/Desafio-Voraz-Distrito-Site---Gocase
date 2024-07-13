@@ -23,7 +23,7 @@ const Login = () => {
     try {
       await login(formData.email, formData.password);
       // Redirecionar ou mostrar uma mensagem de sucesso
-      router.push("/pages/home");
+      router.push("/");
     } catch (error) {
       // Lidar com erros
       console.error("Signup failed:", error);
@@ -49,7 +49,7 @@ const Login = () => {
         <h1>Power.</h1>
         <h1>Influence.</h1>
         <h1>Authority.</h1>
-        <h1 className="pt-16 text-[50px]">You're already a BAD BOY</h1>
+        <h1 className="pt-16 text-[50px]">You&apos;re already a BAD BOY</h1>
       </div>
       <div className="bg-white md:w-2/5 min-h-screen flex justify-center items-center">
         <div className="w-4/5 text-black p-8 rounded-lg">
@@ -87,7 +87,7 @@ const Login = () => {
               onClick={() => router.push("/pages/cadastro")}
               className="text-black mt-8 font-bold cursor-pointer"
             >
-              I don't have an account
+              I don&apos;t have an account
             </p>
           </form>
         </div>
