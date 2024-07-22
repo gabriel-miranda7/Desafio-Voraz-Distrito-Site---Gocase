@@ -7,7 +7,6 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       headers: :any,
       methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
       expose: [ "Authorization" ],
-      credentials: true, # Permite o envio de credenciais (cookies, cabeçalhos de autorização)
-      max_age: 600
+      credentials: true # Permite o envio de credenciais (cookies, cabeçalhos de autorização)
   end
 end
