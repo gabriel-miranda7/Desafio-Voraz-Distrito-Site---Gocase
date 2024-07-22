@@ -131,7 +131,7 @@ const HomePage = () => {
             ))}
       </div>
       <div className="flex justify-between w-4/5 m-20">
-            <Image className="w-[350px]" src={badboys}/>
+            <Image alt="Will Smith Image" className="w-[350px]" src={badboys}/>
             <div className="mx-10 text-[20px]">
             <p className="text-black">We´re the Bad Boys. No.1 reference in quality and branding At Bad Boys, we pride ourselves on setting the standard in the industry. Our commitment to excellence is reflected in every product we create. From innovative designs to top-notch materials, we ensure that our offerings not only meet but exceed customer expectations.<br/>When you choose Bad Boys, you’re not just selecting a product; you’re becoming part of a movement that values authenticity and quality. Explore our collections today and discover why we are the go-to brand for those who demand the best.</p>
             <button className="bg-[#A83050] my-5 text-white font-semibold py-2 px-4 rounded shadow hover:bg-blue-600 transition duration-300 ease-in-out">See more</button>
