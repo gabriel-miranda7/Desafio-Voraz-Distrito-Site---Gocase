@@ -127,12 +127,8 @@ const getProducts = async (): Promise<GetProductsResponse> => {
     try {
         const userProfileCookie = Cookies.get("user_profile");
         const userProfile = JSON.parse(userProfileCookie);
-        const response = await apiProvider.post<GetProductsResponse, { user_profile: string }>("/products/recommended", {
-            user_profile: userProfile
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const response = await apiProvider.get<GetProductsResponse>("/products/recommended", {
+            withCredentials: true
         });
         return response;
     } catch (error) {
