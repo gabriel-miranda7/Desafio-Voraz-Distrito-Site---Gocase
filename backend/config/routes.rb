@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :products, only: [ :index, :show ] do
     collection do
       get "category/:category", to: "products#by_category", as: "by_category"
-      get "recommended"
+      post "recommended"
     end
   end
 

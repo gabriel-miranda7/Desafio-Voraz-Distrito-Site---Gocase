@@ -10,12 +10,9 @@ class ProductsController < ApplicationController
     def recommended
       products = Product.all
 
-      # Verifica se há um cookie de perfil de usuário
-      user_profile_cookie = cookies[:user_profile]
+      user_profile = params[:user_profile]
 
-      if user_profile_cookie.present?
-        # Parse os dados do cookie
-        user_profile = JSON.parse(user_profile_cookie, symbolize_names: true)
+      if user_profile.present?
 
         # Cria um vetor com os dados do perfil do usuário (soma acumulada)
         user_vector = Vector[
