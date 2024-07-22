@@ -125,9 +125,13 @@ const getProductsByCategory = async (category: string): Promise<GetProductsRespo
 
 const getProducts = async (): Promise<GetProductsResponse> => {
     try {
-        // Não é necessário definir o cabeçalho Cookie manualmente.
-        const response = await apiProvider.get<GetProductsResponse>("/products/recommended", {
-            withCredentials: true, // Certifique-se de que as credenciais (cookies) sejam enviadas
+        const userProfile = Cookies.get("user_profile");
+        const response = await apiProvider.post<GetProductsResponse, { user_profile: string }>("/products/recommended", {
+            user_profile: userProfile
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         return response;
     } catch (error) {

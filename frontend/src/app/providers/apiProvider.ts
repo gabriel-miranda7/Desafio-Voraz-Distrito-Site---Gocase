@@ -47,7 +47,6 @@ class ApiProvider {
   ): Promise<T> {
     try {
       const response = await this.instance.post<T>(path, data, options);
-
       return response.data;
     } catch (error) {
       throw error;
