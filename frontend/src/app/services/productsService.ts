@@ -125,7 +125,8 @@ const getProductsByCategory = async (category: string): Promise<GetProductsRespo
 
 const getProducts = async (): Promise<GetProductsResponse> => {
     try {
-        const userProfile = Cookies.get("user_profile");
+        const userProfileCookie = Cookies.get("user_profile");
+        const userProfile = JSON.parse(userProfileCookie);
         const response = await apiProvider.post<GetProductsResponse, { user_profile: string }>("/products/recommended", {
             user_profile: userProfile
         }, {
