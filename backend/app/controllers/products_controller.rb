@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
         render json: sorted_products, status: :ok
       else
         # Caso não haja dados no cookie, exibe produtos de forma padrão
-        render json: products
+        # render json: products
       end
     end
 
